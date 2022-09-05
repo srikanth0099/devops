@@ -1,0 +1,185 @@
+uses : create ebs vol, vm's, add users, copy logs to s3 bucket, s/w installation
+
+touch filename --> to create a file
+cd /root or cd ~ --> home directory
+vim/vi/nano(ctrl+o and ctrl+x) --> editing tools
+vim i esc :wq
+
+#!/bin/bash
+echo "Srikanth"
+
+extension can be anything but we prefer .sh
+to execute script we need to provide permissions i.e 
+chmod 700 scriptname to execute ./scriptname
+mv scriptname newscript --> will create copy of old one
+we can script using bash scriptname when there is no execute permisson
+
+variables:
+#!/bin/bash
+name = $user
+echo $name
+
+scriptname.sh srikanth
+
+
+nano scriptname.sh && chmod 700 scriptname.sh
+cat scriptname.sh | bash -> input of cat will be given to bash as output so script will execute for this cmd
+ls -al | grep -i filename/word
+i=$@ -> parameters like scriptname.sh 150-->starts from 150
+aws s3 ls
+aws configure
+BUCk = $(aws s3 ls |grep -i devops | cut -d " " -f 3) or BUCk = `aws s3 ls |grep -i devops | cut -d " " -f 3`
+tmux ctrl+B and % -> for multi screen ctrl+B shift+left arrow
+watch -n 1 -> to watch the logs
+rm -f file* -> to remove the files
+date -> to get current date
+date > file1 -> get current date and will keep in file1
+aws s3 cp file 1 s3://bucketname -> will put file1 into s3 bucket
+
+#!/bin/bash
+I=0
+while [ $I -lt 11]
+do
+date > file$I
+aws s3 cp file$I s3://bucketname 
+sleep 1
+I = $(( $I+1 ))
+done
+
+it will upload date files to s3 bucket
+
+write script to add user 
+cat /etc/passwd -> all the users will be stored in this path
+useradd -m user1 -> user will add to above path
+userdel -r user1 -> delete user
+
+#!/bin/bash
+set -x -e -> debugging mode will print evryline
+read -p "Please enter username" USER -> prompt on screen
+if [-z "$USER"]
+then
+	echo "It's not a valid user $USER"
+else 
+	echo "The user name is $USER"
+	ex_user = $(cat /ect/passwd |cut -d ":" -f 1 | grep -w $USER)
+	if [ "$USER" = "$ex_user" ]
+	then 
+	echo "user already exist"
+	else
+	echo "Let's create user"
+	useradd -m $USER
+	SPEC = $(echo '@#$%_^*' | fold -w1 | shuf | head -1)
+	PASSWD = "India@${RANDOM}${SPEC}
+	echo $PASSWD
+      #	read -s -p "Pls Enter passwd" PASSWD
+	echo "$USER:$PASSWD" | sudo chpasswd
+	passwd -e "${USER}" ->passwd expiry
+	fi
+fi
+
+------------------------------------------------
+cat /etc/passwd | grep -i $USER
+
+nano /etc/ssh/sshd_config
+keep passwd auth as yes
+service sshd restart
+
+grep -i vs grep -n -w -> is exact match
+echo '@#$%_^*' | fold -w1 #-> will convert horizantal to vertical# | shuf #shuffle the characters# | head -1 #will take 1st character#
+
+$?->checking previous excute cmd true or not ex: ls -al -> now use echo $? ->o/p ->0
+$@->enter any no. of params but cmds must run on each params , for strings it will split
+$*-> same as $@ but for strings differ
+$#->check for no.of params entered
+ex:
+#!/bin/bash
+echo "no of params entered is $#"
+if [ $# -gt 3 ]
+then 
+echo "pls enter max 3"
+else 
+echo "you entered $#"
+fi
+
+$? ex:
+
+#!/bin/bash
+read -p "enter URl" URL
+wget $URL
+if [ $? -eq 0 ]
+then
+echo "success"
+ls -al
+else
+echo "not success"
+fi
+
+
+
+awk:next level of grep
+---
+cut and grep can be used as one cmd
+ex: ./scriptname.sh | awk '/manager/{print $1,$7,$4}'
+
+sed: to replace a text in a file or to insert a new string
+-----
+sed '15 i <h1> Welcome</h1> -i scriptname.sh
+ex:sed -i 's/oldtext/newtext/g'-> single chnage s->subtitute ,g->global
+sed -i 's/srik/srikanth/g; s/123/143/g' scriptname.sh --> multichange
+
+for loop:
+==========
+#!/bin/bash
+echo $@
+for vm in $@
+do
+echo "creating volumes"
+aws ec2 create-vloume --volume-type gp2 --size $VOL --availability-zone us-east-1a
+done
+
+aws ec2 create-vloume --volume-type gp2 --size 1 --availability-zone us-east-1a
+
+tr:
+====
+to delete characters
+ex: tr -d ":"
+
+> override the content
+>> append to the content
+
+aws ec2 describe-instances
+
+via aws configure or attach iam role to server
+
+AND -> -a &&
+OR -> -o ||
+
+-f file -> check if files exists
+-d file -> check if directory exists
+ARRAYS
+=======
+a=(r g he)
+echo $a
+
+FUNCTIONS:
+========
+#!/bin/bash
+hello() {
+echo"Hi"
+}
+hello
+
+===============
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+.travis.ym
+======
+
+sudo:required
+services:
+   -docker
+before_install:
+    -docker build -t image name -f Dockerfile.dev .
+
+script:
+   -docker run image name npm run test -- -- coverage
+
+deploy:
+   provider:elasticbeanstalk
+   region:"us-east-2"
+   app:"docker"
+   env:"docker-env"
+   bucker_name:"elastcbeanstalk-us-west-2-87392"
+   bucket_path:"docker"
+   on: 
+     branch:master
+   access_key_id: "$AWS_ACCESS_KEY"
+   sectret_access_key:
+     secure: "$AWS_SECRET_KEY" 

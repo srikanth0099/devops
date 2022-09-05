@@ -1,0 +1,5 @@
+ $PSVersionTable
+ext is .ps
+Write-Output to print
+iwr url -OutFile filename
+Get-Alias

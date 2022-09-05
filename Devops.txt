@@ -1,0 +1,24 @@
+git config --list
+git config --global user.name "Srikanth"
+git config --global user.email "srikanth.vutukuri58@gmail.com"
+git config --list
+git help
+git help cmdname
+
+go to the directory via cd then 
+git init
+git status
+git add .
+git commit -m "first commit"
+git log  -> will show commit logs
+git log --author="Srikanth"  -> to know the commit done by specific person
+
+make sublime as default editor for git:
+git config --global core.editor "subl -n -w"
+git diff -->show difference b/w the doc commited/saved
+git diff --staged
+git rm filename
+
+git remote add origin reponame
+git pull origin master
+git push origin master

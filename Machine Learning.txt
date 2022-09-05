@@ -1,0 +1,119 @@
+Supervised
+--------------
+1. classifaction
+2. Regression
+structure data: rows and colums with proper labels
+
+Unsupervised
+-----------
+1. Clustering
+2. Associative rule learning
+unstructured data: images, audio, videos
+
+Transfer Learning
+Rienforcement learning
+
+conda create --prefix ./env numpy pandas matplotlib scikit-learn
+conda activate C:\Users\srika\Desktop\ds\env
+conda deactivate
+conda env list
+conda activate C:\Users\srika\Desktop\ds\env
+
+pandas
+-------
+series=pd.series([])--> 1d
+dataframe = pd.DataFrame({"car":series, "colors":sketches})-2d
+import data: 
+df = pd.read_csv('filename')
+axix=0-> row
+axis=1->column
+export data:
+filename.to_csv('new filename.csv', index=False)
+describe data:
+df.dtypes
+df.columns
+df.describe()
+df.info()
+df.mean()
+df.sum()
+df['columnname'].sum()
+len(df)
+
+viewing ans selecting data
+-------------
+df.head(n)
+df.tail(m)
+loc and iloc:
+-============
+loc refers to index number ex: df.loc[3]
+iloc refers to index of position ex: df.iloc[2]
+df[df['colunmname']==/>/<'sri']
+
+pd.crosstab(df['colunmname'],df['colunmname1'])
+df.groupby([''colunmname']).mean()
+df['colunmname'].plot()
+
+
+%matplotlib inline
+import matplotlib.pyplot as plt
+
+df['colunmname'].hist()
+
+Manipulating data
+=========
+df['colunmname'] = df['colunmname'].str.lower() -> again assign it
+NaN is missing data
+to fill -> df['colunmname'].fillna(df['colunmname'].mean(), inplace = True)-> inplace means instead of assigning it will get modified on same line
+df['colunmname'].dropna(inplace = True)
+df['colunmname'] = colunmname
+df['colunmname'].fillna(5)
+df['colunmname'].drop(axis=1)-> column drops
+df1 = df.sample(frac = 1/0.5/0.2/0.01) -> will shuffle all the rows in csv
+df1.reset_index(drop = True, inplace = True) ->will shuffle back to original data
+df['colunmname'] =  df['colunmname'].apply(lambda x : x / 1.6)
+
+
+NUMPY
+====
+import numpy as np
+df = np.array([1,2,3])
+df =np.array([[1,2,3],[4,5,6]])
+df.shape
+df.ndim, df1.ndim,df2.ndim
+df.dtype
+df.size
+type(df)
+create df from array
+=================
+df = pd.DataFrame(df1)
+Creating arrays
+---------------
+ones =np.ones((2,3))
+zero=np.zeros((2,3))
+range = np.arrange(0,12,2)
+--------------------------
+np.random.seed(seed=0)->pesudo numbers
+random= np.random.randint(0,10,size=(3,5))->will reflect everthing when refresh, so we keep seedto 0sowill not reflected
+----------------------------------------
+random=np.random.random((5,3))
+random=np.random.rand(5,3)
+np.unique(df)
+np.add((df,df1)
+np.sqaure(2)
+np.log(df)
+np.exp(df)
+AGGREGATION:performing same operation on number of things
+-------------------------
+%timeit sum(df)
+%timeitnp.sum(df)
+sd =squareroot(var)
+df.reshape(2,3,1)
+df.T->transpose
+TURN IMAGE TO NUMPY ARRAY
+=====================
+from matplotlib.image import imread
+
+panda=imread("images/panda.png")
+print(type(panda))
+https://digitalprofile.ultimatix.net/DigitalProfile/#/profile?errorOnboarding=True
+

@@ -1,0 +1,48 @@
+DOKER:
+----
+docker run hello-world
+docker run busybox echo hi there
+
+docker create hello-world
+docker start -a conatiner-id from above cmd
+docker logs container-id from above cmd
+
+docker start c-id  10sec gap stop
+docker kill c-id  quick stop
+docker exec -it c-id sh -->running conatiner
+docker run-it c-id sh -->to start conatiner
+
+Dockerfile
+FROM base-image
+RUN update dependicies
+CMD ["xxxx"]
+
+docker build . --> will create image
+
+docker build -t sriki05/c-name:latest .  ---> tag an image
+
+
+docker run -it alpine sh
+apk app --update redis
+docker commit -c 'CMD["redis-server"]' c-id
+
+
+docker nodejs
+------
+FROM node:alpine
+WORKDIR /usr/app
+COPY ./ ./
+RUN npm install
+CMD ["npm","start"]
+
+docker build -t sriki05/simpleweb:latest .
+docker run -p 8080(local):808(con) simpleweb
+
+Inorder to reduce the build time what we can do is
+FROM node:alpine
+WORKDIR /usr/app
+COPY ./package.son ./
+RUN npm install
+COPY ./ ./
+CMD ["npm","start"] 
+

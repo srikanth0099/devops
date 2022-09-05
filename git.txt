@@ -1,0 +1,11 @@
+git init
+git status -> tracking
+git add .
+git commit -m "msg"
+git log -> will show the previous commits
+git remote -v -> shows remote repos if any
+git remote add origin giturl
+git log --oneline
+git push origin master
+git pull --> will pull the latest code
+
