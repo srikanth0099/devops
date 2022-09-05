@@ -22,3 +22,8 @@ git rm filename
 git remote add origin reponame
 git pull origin master
 git push origin master
+
+new branch:
+git branch branchname
+git checkout branchname
+git branch
