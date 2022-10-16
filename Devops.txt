@@ -12,6 +12,9 @@ git add .
 git commit -m "first commit"
 git log  -> will show commit logs
 git log --author="Srikanth"  -> to know the commit done by specific person
+git log --oneline --graph --decorate
+git log --since="2 days ago"
+git show commitid
 
 make sublime as default editor for git:
 git config --global core.editor "subl -n -w"
@@ -27,3 +30,91 @@ new branch:
 git branch branchname
 git checkout branchname
 git branch
+git push origin branchname
+
+
+merge:
+git checkout targetbranchnamehere master
+git merge sourcebranchnamehere v1.1
+git push origin master
+
+
+revert from staging to working:
+git reset HEAD filename
+to revert the changes in file use:
+git checkout --filename ->discard the changes
+================================
+revert the commit:
+git log ->check for commit number
+git reset HEAD~ -> revert latest commit
+
+============================
+git rm filename
+git reset HEAD filename
+git checkout filename
+
+=========================================
+alias names for git cmd:
+
+ex:git log --all --graph --decorate --oneline
+we need to add to global config file i.e
+git config --global alias.aliasname "log --all --graph --decorate --oneline"
+git config --global alias.loghistory "log --all --graph --decorate --oneline"
+subl ~/.gitconfig -->to edit/modify the alias
+=======================
+.gitignore -> to ignore the specific files 
+
+
+git diff HEAD ->work dir and git repo
+git diff --staged HEAD -> stagedir and git repo
+===============
+diff b/w commits:
+git diff commitid1 id2
+git diff HEAD HEAD^   -> last commit vs last but one commit
+
+git tag tagname
+git tag --list
+git tag delete tagname
+
+Annotated tag:
+git tag -a tagname---> release code v1.0
+git show v1.0
+git diff v1.0 v1.2
+git tag -a v1.3 commitid  -> to tag specific commit
+git tag -a v1.3 -f commitid ->to modify tag name
+
+
+
+git checkout filename -> to revert the changes in file
+git commit --amend -m "message"->to change commit message
+git reset --soft commitid  -> revert to that particular commit(4) staging area
+git reset commitid -> hard without soft will show upin working area
+git reset --hard commitid -> no data will left for recover
+
+
+git branch -m v1.1 v1.01-> to rename the branch
+git branch -d branchname -> to delete branch
+
+
+git checkout master
+git merge v1.1
+
+git reflog -> contains all data either hard reset or soft take commitid 
+git checkout commitid -> it will reflect back
+
+
+git clean -df -> to clean directory file
+
+
+
+Jenkins
+============
+java -jar jenkins.war ---httpPort::8080 -> start jenkins on windows
+master slave/node->using slave agents
+executor
+
+mlgwcustomercare@mlgw.org
+
+
+
+

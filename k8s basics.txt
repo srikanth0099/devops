@@ -1,0 +1,41 @@
+kubectl -n kubernetes-dashboard create token admin-user
+
+kubectl proxy
+
+kubectl get nodes -o wide
+kubectl run my-pod --image stacksimplify/kubenginx:4.0.0
+kubectl get pods -o wide
+kubectl describe pod my-pod
+kubectl delete pod my-pod
+kubectl expose pod my-pod --type=NodePort --port=80 --name=first-svc
+by default target port and nodeport will be 80 but if you chnage port to other than 80 need to specify target port also.
+kubectl expose pod my-pod --type=NodePort --port=82 --target-port=80 --name=first-svc2
+kubectl get service
+kubectl get nodes -o wide
+
+http://localhost:31065/  i.e ip:portnumber fromsvc
+
+kubectl logs -f my-pod
+kubectl exec -it my-pod -- /bin/bash
+kubectl exec -it my-pod env/ls/cat file
+kubectl get pod my-pod -o yaml
+kubectl get service first-svc -o yaml
+kubectl get all
+kubectl delete pod my-pod
+kubectl delete svc first-svc
+kubectl create -f replicaset-demo.yml
+kubectl get replicaset/rs
+kubectl describe rs my-helloworld-rs
+kubectl expose rs my-helloworld-rs --type=NodePort --port=80 --target-port=8080 --name=first-svc
+kubectl get service
+kubectl delete pod my-helloworld-rs-9mt4w
+kubectl replace -f replicaset-demo.yml -> changed replicaset from 6 to 3
+kubectl get pods
+kubectl delete rs my-helloworld-rs
+kubectl delete svc first-svc
+kubectl get all
+
+
+
+
+
