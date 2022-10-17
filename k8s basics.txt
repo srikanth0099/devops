@@ -1,7 +1,7 @@
 kubectl -n kubernetes-dashboard create token admin-user
 
 kubectl proxy
-
+Imperative:
 kubectl get nodes -o wide
 kubectl run my-pod --image stacksimplify/kubenginx:4.0.0
 kubectl get pods -o wide
@@ -34,6 +34,28 @@ kubectl get pods
 kubectl delete rs my-helloworld-rs
 kubectl delete svc first-svc
 kubectl get all
+kubectl create deployment my-first-deployment --image=stacksimplify/kubenginx:1.0.0 
+kubectl get deployments
+kubectl get deploy 
+kubectl scale --replicas=20 deployment my-first-deployment 
+kubectl expose deployment my-first-deployment --type=NodePort --port=80 --target-port=80 --name=my-first-deployment-service
+kubectl set image deployment/my-first-deployment kubenginx=stacksimplify/kubenginx:2.0.0 --record=true
+kubectl edit deployment/my-first-deployment --record=true
+kubectl rollout undo deployment my-first
+kubectl rollout history deployment my-first --revision=2
+kubectl rollout undo deployment/my-first-deployment --to-revision=3
+kubectl rollout restart deployment/my-first-deployment
+kubectl rollout pause deployment/my-first-deployment
+kubectl set image deployment/my-first-deployment kubenginx=stacksimplify/kubenginx:4.0.0 --record=true
+kubectl set resources deployment/my-first-deployment -c=kubenginx --limits=cpu=20m,memory=30Mi
+kubectl rollout resume deployment/my-first-deployment
+clusterip for backend:
+kubectl create deployment my-backend-rest-app --image=stacksimplify/kube-helloworld:1.0.0 
+kubectl expose deployment my-backend-rest-app --port=8080 --target-port=8080 --name=my-backend-service
+nodeport for frontend:
+kubectl create deployment my-frontend-nginx-app --image=stacksimplify/kube-frontend-nginx:1.0.0 
+kubectl expose deployment my-frontend-nginx-app  --type=NodePort --port=80 --target-port=80 --name=my-frontend-service
+
 
 
 
